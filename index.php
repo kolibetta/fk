@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_SESSION['user_session'])!="")
 {
-	header("Location: home.php");
+	header("Location: dashboard.php");
 }
 
 ?>
@@ -16,7 +16,7 @@ if(isset($_SESSION['user_session'])!="")
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../images/favicon.ico">
-    <title>Lion Admin - Log in </title>
+    <title>Flipkart IOT Services </title>
 	<link rel="stylesheet" href="assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor_components/bootstrap/dist/css/bootstrap-extend.css">
 	<link rel="stylesheet" href="css/master_style.css">
@@ -54,11 +54,6 @@ if(isset($_SESSION['user_session'])!="")
     </form>
 
 
-    <!-- /.social-auth-links -->
-
-    <div class="margin-top-30 text-center">
-    	<p>Don't have an account? <a href="register.html" class="text-info m-l-5">Sign Up</a></p>
-    </div>
 
   </div>
   <!-- /.login-box-body -->
