@@ -21,24 +21,6 @@
 	$conn = mysqli_connect($gaSql['server'], $gaSql['user'], $gaSql['password'], $gaSql['db']);
 	
 	
-///get Google map Adrdess//////////////////////////////////////////////////
-function getaddress($lat,$lng)
-  {
-     $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($lat).','.trim($lng).'&sensor=false';
-     $json = @file_get_contents($url);
-     $data=json_decode($json);
-     $status = $data->status;
-     if($status=="OK")
-     {
-	   $full_address=$data->results[0]->formatted_address;
-       $state=$data->results[7]->formatted_address;
-	   return $full_address."@@@".$state;
-     }
-     else
-     {
-       return false;
-     }
-  }	
-////////////////////////////////////////////////////////////////////////////	
+
 
 ?>

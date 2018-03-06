@@ -23,11 +23,14 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
+	  
+	  <a>
+	  	<h3 style="color:#fff;font-weight:400;font-size:25px;">Quinta Systems</h3>
+	  </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		  
-		  			
+		 		
 		  
           <!-- Messages -->
           
@@ -39,6 +42,8 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="images/user5-128x128.jpg" class="user-image rounded-circle" alt="User Image">
+			  <span style="color:#fff;font-weight:400;font-size:12px;"><?php echo $row['profile_name']; ?></span>
+			  <small style="color:#fff;font-weight:400;font-size:10px;"> <?php echo $row['profile_emailid']; ?></small>
             </a>
             <ul class="dropdown-menu scale-up">
               <!-- User image -->
