@@ -109,6 +109,69 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 
     <!-- Main content -->
     <section class="content">
+	<?php
+	$sql_stasttics=mysqli_query($conn, "select count(*) as total_user_count from tbl_iot_details");
+	$res_stasttics=mysqli_fetch_array($sql_stasttics);
+	$total_user_count=$res_stasttics["total_user_count"];
+	?>
+<div class="row">
+        <div class="col-xl-3 col-md-6 col-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="ion ion-stats-bars"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-number">600</span>
+              <span class="info-box-text" style="text-transform:none;">Total Visit</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-xl-3 col-md-6 col-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-success"><i class="ion ion-thumbsup"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-number"><?php echo $total_user_count;?></span>
+              <span class="info-box-text" style="text-transform:none;">Total Users</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-xl-3 col-md-6 col-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-purple"><i class="ion ion-bag"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-number">30</span>
+              <span class="info-box-text" style="text-transform:none;">States</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-xl-3 col-md-6 col-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="ion ion-person-stalker"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-number">2,000</span>
+              <span class="info-box-text" style="text-transform:none;">Join Members</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>	
 	  
 	  <div class="row">
 		  
@@ -116,7 +179,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
           <!-- Stacked/Grouped Multi-Bar Chart-->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Users Statics</h3>
+              <h3 class="box-title">Users Statistics</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -128,10 +191,11 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 			
 					<div class="row">
 					
-					
-						<div class="col-md-6">
+						<div class="col-md-3" style="margin-left:0px;"><strong>Select Year : </strong></div>
+						<div class="col-md-3" style="margin-left:0px;">
 							<div class="form-group">
-									<select  name="start_date" id="start_date" data-placeholder="Select Year"  class="form-control chzn-select"  style="display:inline-block;"  onChange="dochange_statics(this.value);">
+									
+									<select  name="start_date" id="start_date" data-placeholder="Select Year"  class="form-control chzn-select"  style="width:200px;display:inline;"  onChange="dochange_statics(this.value);">
 									  <option value="">Select Year</option>
 									  <?php
 									  $sql_select_year=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%Y') as iot_date  from  tbl_iot_details group by DATE_FORMAT(iot_datetime, '%Y')");
@@ -145,6 +209,16 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 					</div>			
 			</div>
             <div id="ajax_stastics"></div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
@@ -163,7 +237,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
             </div>
             <div class="box-body">
 			  
-              <div id="map" style="width:100%;height:500px;"></div>
+              <div id="map" style="width:100%;height:900px;"></div>
             </div>
             <!-- /.box-body -->
           </div>

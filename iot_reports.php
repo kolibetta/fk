@@ -9,10 +9,37 @@ if(!isset($_SESSION['user_session'])){
 <html lang="en">
 <head>
  <?php include_once('header.php');?> 
+<style>
 
+/* Preloader */
+#preloader {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#fff; /* change if the mask should have another color then white */
+	z-index:3000; /* makes sure it stays on top */
+}
+
+#status {
+	width:640px;
+	height:314px;
+	position:absolute;
+	left:30%; /* centers the loading animation horizontally one the screen */
+	top:50%; /* centers the loading animation vertically one the screen */
+	background-image:url(btn-ajax-loader.gif); /* path to your loading animation */
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:-100px 0 0 -100px; /* is width and height divided by two */
+}
+</style>
 </head>
 
 <body class="hold-transition skin-blue-light sidebar-mini sidebar-collapse fixed">
+<div id="preloader">
+	<div id="status"></div>
+</div>
 <div class="wrapper">
 
   	<?php include_once("header_menu.php");?>
@@ -114,5 +141,17 @@ if(!isset($_SESSION['user_session'])){
   <div class="control-sidebar-bg"></div>
 </div>
 	<?php include_once('js_footer.php');?>
+	
+	<script language="JavaScript">
+			//<![CDATA[
+			$(window).load(function() { // makes sure the whole site is loaded
+				$('#status').fadeOut(); // will first fade out the loading animation
+				$('#preloader').fadeOut('fast'); // will fade out the white DIV that covers the website.
+				$('body').css({'overflow':'visible'});
+			})
+		//]]>  
+	  
+	  </script>		
+	
 </body>
 </html>

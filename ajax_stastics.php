@@ -117,8 +117,50 @@ $action=date('Y');
 					}]
 				});
 				
-				</script>				  
-			  
+				</script>		
+				
+				
+				
+				
+<div id="container_pie" style="height:400px"></div>
+						  
+<script  language="javascript">
+Highcharts.chart('container_pie', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Contents of Statewise User Statistics Report'
+    },
+    subtitle: {
+        text: '3D donut in Statewise Statistics Report'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Users Hit Count',
+        data: [
+            ['Karnataka', 8],
+            ['Rajasthana', 3],
+            ['Tamil Nadu', 1],
+            ['Kerala', 6],
+            ['Gujrat', 8],
+            ['Hariyana', 4],
+            ['Uttra Pradesh', 4],
+            ['Assam', 1],
+            ['maharashtra', 1]
+        ]
+    }]
+});
+</script>			  
 			  
             </div>
 			

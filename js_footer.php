@@ -1,21 +1,10 @@
 <!-- jQuery 3 -->
-	<script src="assets/vendor_components/jquery/dist/jquery.min.js"></script>
-	
-	<!-- popper -->
+	<script src="js/jquery.js"></script>
 	<script src="assets/vendor_components/popper/dist/popper.min.js"></script>
-	
-	<!-- Bootstrap 4.0-->
 	<script src="assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	
-
-	
-	<!-- Sparkline -->
 	<script src="assets/vendor_components/jquery-sparkline/dist/jquery.sparkline.js"></script>		
-	
-	<!-- DataTables -->
 	<script src="assets/vendor_components/datatables.net/js/jquery.dataTables.min.js"></script>
 	<script src="assets/vendor_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-	
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 	<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -46,6 +35,10 @@
 		    $('#example1').DataTable( {
 				"aProcessing": true,
 				"aServerSide": true,
+				 language: {
+					 processing: "<img src='btn-ajax-loader.gif'>"
+				  },
+				  
 				//"scrollY": 600,
 				//"scrollX": true,
 				

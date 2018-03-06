@@ -16,7 +16,6 @@
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
 		<li class="nav-devider"></li>
-        <li class="header nav-small-cap">PERSONAL</li>
         <li>
           <a href="dashboard.php">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
