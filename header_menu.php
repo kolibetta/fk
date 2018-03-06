@@ -8,7 +8,7 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
 	  <b class="logo-mini">
-		  <span class="light-logo"><img src="images/logo-light.png" alt="logo"></span>
+
 		  <span class="dark-logo"><img src="images/logo-dark.png" alt="logo"></span>
 	  </b>
       <!-- logo for regular state and mobile devices -->

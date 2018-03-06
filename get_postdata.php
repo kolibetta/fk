@@ -3,7 +3,10 @@
 	
 //////POST DATA/////////////////////////////////////////////////////////////////////
 	//'iot_datetime', 'iot_latitude', 'iot_longitude', 'iot_batteryvoltage', 'iot_sampling_frequency', 'iot_posting_frequency', 'iot_gpsfixed', 'iot_satellitesfixed', 'iot_imeino', 'iot_power_onoff'
-	
+	$json_data = array(
+		"status" => 0,
+		"POST_DATA" => isset($_POST) ? $_POST : array(),
+	);
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$iot_datetime=$_POST["iot_datetime"];
@@ -29,8 +32,14 @@
 		$sql_insert_query=mysqli_query($conn, "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `created_date`) 
 		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address', '$created_date')");
 		//////////Insert Query////////////////////////////////////////////////////////////
+		if($sql_insert_query){
+			$json_data["status"] = 1;
+		}
+		echo json_encode($json_data);
+		return;
 	}
-	
+	echo json_encode($json_data);
+	return;
 
 //////POST DATA/////////////////////////////////////////////////////////////////////
 

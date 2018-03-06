@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Flipkart - Dashboard</title>
+    <title>Quinta Systems </title>
   
 	<!-- Bootstrap 4.0-->
 	<link rel="stylesheet" href="assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">

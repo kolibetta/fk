@@ -6,12 +6,10 @@
 		 <div class="ulogo">
 			 <a href="dashboard.php">
 			  <!-- logo for regular state and mobile devices -->
-			  <span><b>EMBTECH </b>INNOVA</span>
+			  <div><img src="images/logo-dark-text.png"></div>
 			</a>
 		</div>
-        <div class="image">
-          <img src="images/user2-160x160.jpg" class="rounded-circle" alt="User Image"><br />
-        </div>
+
         
       </div>
       

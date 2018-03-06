@@ -29,12 +29,13 @@ if(isset($_SESSION['user_session'])!="")
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <b>Embtech </b>Innova
+    
 	<div id="error"></div>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+    <div align="center" style="margin-bottom:20px;"><img src="images/logo.png"></div>
+
 
     <form class="form-element" method="post" id="login-form">
       <div class="form-group has-feedback">
