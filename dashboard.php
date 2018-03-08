@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 session_start();
 include_once 'dbconfig.php';
 if(!isset($_SESSION['user_session'])){
@@ -22,26 +23,123 @@ if(!isset($_SESSION['user_session'])){
 <script src="js/highcharts-3d.js"></script>
 <script src="js/exporting.js"></script>
 
+<?php
+
+	$search_country=$_REQUEST["search_country"];
+	
+	if($search_country) { 
+	
+		$join_country=" and iot_countryname='$search_country' "; 
+		$sqlgetlatlondetailsCountry=mysqli_query($conn, "select iot_latitude,iot_longitude,iot_countryname from  tbl_iot_details where 1=1 $join_country and iot_countryname<>'' group by iot_countryname");
+		$resgetlatlondetailsCountry=mysqli_fetch_array($sqlgetlatlondetailsCountry);
+		if($sqlgetlatlondetailsCountry) {
+			$country_lat=$resgetlatlondetailsCountry["iot_latitude"];
+			$country_lon=$resgetlatlondetailsCountry["iot_longitude"];
+			$zoom=4;
+		} else { 
+			$country_lat="15.184344641774892";
+			$country_lon="76.2060546875";
+			$zoom=1;
+		}
+		
+	} else { 
+		$country_lat="15.184344641774892";
+		$country_lon="76.2060546875";
+		$zoom=1;
+	}
+	
+
+	?>
 <script>
       function initMap() {
-		var mapCenter = new google.maps.LatLng(15.184344641774892, 76.2060546875);
+		var mapCenter = new google.maps.LatLng(<?php echo $country_lat;?>, <?php echo $country_lon;?>);
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: <?php echo $zoom;?>,
          center: mapCenter
         });			  
 
 
 <?php 
-	$sqlgetlatlondetails=mysqli_query($conn, "select * from  tbl_iot_details where iot_geolocation<>''");
+	
+	if($search_country) { $join_country=" and iot_countryname='$search_country' ";} else {$join_country="";}
+	$sqlgetlatlondetails=mysqli_query($conn, "select * from  tbl_iot_details where iot_cityname<>'' $join_country group by iot_cityname");
 	$count_geo=0;
 	while($res_getlatlondetails=mysqli_fetch_array($sqlgetlatlondetails)) { 
 	$count_geo++;
-?>
-var contentString<?php echo $count_geo;?> = '<div id="content" style="background:#ffffff;">'
-				+ '<table width="350"  cellspacing="0" cellpadding="0" border="0"   bgcolor="#ffffff">'
+	$iot_cityname=$res_getlatlondetails["iot_cityname"];
+	
 
+	
+?>
+var contentString<?php echo $count_geo;?> = '<div id="content" style="background:#ffffff;overflow-y:scroll;width:300px;max-height:350px;">'
+				+ '<table width="100%"  cellspacing="0" cellpadding="0" border="0"   >'
 					+ '<tr>' 
-					+ '<td  valign=middle bgcolor="#ffffff" class="website_font" style="padding:10px;" valign="top"><span style=font-weight:bold;><?php echo $res_getlatlondetails["iot_address"];?></td>'
+					+ '<td  valign=middle   style="padding:5px;" valign="top">'
+					
+					<?php 
+					$sqlgetlatlondetails_A=mysqli_query($conn, "select * from  tbl_iot_details where iot_cityname='$iot_cityname'");
+					$numdetails_latlon=mysqli_num_rows($sqlgetlatlondetails_A);
+					$count_geoA=0;
+					while($res_getlatlondetails_A=mysqli_fetch_array($sqlgetlatlondetails_A)) { 
+					$count_geoA++;
+					?>
+					
+						+ '<table width="100%"  cellspacing="0" cellpadding="0" border="0" style="font-size:11px;border:1px solid #d5d5d5;background: linear-gradient(#F5F5F5, #FFFFFF);margin-bottom:10px;">'
+							
+							+ '<tr>'
+								+ '<td colspan="2"  valign=middle   style="padding:5px;font-size:11px;" valign="top"><div style="font-weight:bold;font-size:13px;">Address : </div><div style="padding-top:10px;font-size:11px;"><?php echo $res_getlatlondetails_A['iot_address'];?></div>'
+								+ '</td>'
+							+ '</tr>'
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Date - Time</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_datetime'];?></td>'
+							+ '</tr>'	
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">IMEINO</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_imeino']);?></td>'
+							+ '</tr>'							
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">QR Code</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_qrcode'];?></td>'
+							+ '</tr>'							
+
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Latitude</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_latitude'];?></td>'
+							+ '</tr>'
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Longitude</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_longitude'];?></td>'
+							+ '</tr>'							
+							
+														
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">City</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_cityname'];?></td>'
+							+ '</tr>'
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">State</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_statename'];?></td>'
+							+ '</tr>'
+							
+							+ '<tr>'
+								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Country</td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_countryname'];?></td>'
+							+ '</tr>'
+																					
+							
+
+						+ '</table>'
+					<?php }?>
+						
+					+ '</td>'
 					+ '</tr>'
 					+ '</table>'
 + '</div>'; 
@@ -51,10 +149,14 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
         content: contentString<?php echo $count_geo;?>        
 		});
         var marker<?php echo $count_geo;?> = new google.maps.Marker({
-         position: new google.maps.LatLng(<?php echo $res_getlatlondetails["iot_latitude"];?>, <?php echo $res_getlatlondetails["iot_longitude"];?>),
+         position: new google.maps.LatLng(<?php echo $res_getlatlondetails["iot_city_latitude"];?>, <?php echo $res_getlatlondetails["iot_city_longitude"];?>),
           map: map,
 		  icon: 'images/hq.png',  
-          title: '<?php echo $res_getlatlondetails["iot_address"];?>'
+		  label: {
+			text: '<?php echo $numdetails_latlon;?>',
+			color: 'white',
+		  },
+          title: '<?php echo $res_getlatlondetails["iot_cityname"];?>'
         });
         marker<?php echo $count_geo;?>.addListener('click', function() {
           infowindow<?php echo $count_geo;?>.open(map, marker<?php echo $count_geo;?>);
@@ -72,6 +174,22 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 	
 	<script language="javascript">
 	dochange_statics('');
+	dochange_statics_circle('');
+	
+	function dochange_statics_circle(action) {
+				
+				$.ajax({
+				type: "POST",
+				url: "ajax_stastics_circle.php",
+				data: "action="+action,
+					success : function(data){
+						$('#ajax_stastics_circle').css("display","block");  //Changes the style of table from display:none to display:block
+						$('#ajax_stastics_circle').html(data);
+					}
+				});
+		}	
+	
+	
 	
 	function dochange_statics(action) {
 				
@@ -87,7 +205,11 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 		}
 	</script>
 	
-	
+	<script type="text/javascript">
+	function change_url(val) {
+	parent.location.href="dashboard.php?search_country="+val;
+	}
+	</script> 	
 </head>
 
 <body class="hold-transition skin-blue-light sidebar-mini  fixed">
@@ -206,11 +328,42 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 									  </select>
 						  </div>
 						</div>
-					</div>			
+					</div>
+					
+					<div id="ajax_stastics"></div>
+					
+					
+					
+					
+					
+					<div class="row">
+						<div class="col-md-3" style="margin-left:0px;"><strong>Select State : </strong></div>
+						<div class="col-md-3" style="margin-left:0px;">
+							<div class="form-group">
+
+									
+									<select  name="search_state" id="search_state"  onChange="dochange_statics_circle(this.value);" data-placeholder="State"  class="form-control chzn-select"  style="width:200px;display:inline;" >
+									  <option value="">Karnataka</option>
+									  <?php
+									  $sqlSearchState=mysqli_query($conn, "select trim(iot_statename)  from  tbl_iot_details  group by trim(iot_statename) order by iot_statename");
+									  while($resSearchState=mysqli_fetch_array($sqlSearchState)) { 
+									  ?>	
+									  <option value="<?php echo $resSearchState["iot_statename"];?>" <?php if($resSearchState["iot_statename"]==$search_country) { echo 'selected';}?>><?php echo $resSearchState["iot_statename"];?></option>
+									  <?php  }?>
+									  </select>
+						  </div>
+						</div>
+					</div>				
+			
+					<div id="ajax_stastics_circle"></div>					
+					
+					
+					
+					
 			</div>
-            <div id="ajax_stastics"></div>
 			
 			
+
 			
 			
 			
@@ -236,6 +389,26 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
               </div>
             </div>
             <div class="box-body">
+			
+					<div class="row">
+						<div class="col-md-3" style="margin-left:0px;"><strong>Select Country : </strong></div>
+						<div class="col-md-3" style="margin-left:0px;">
+							<div class="form-group">
+
+									
+									<select  name="search_country" id="search_country"  onchange="change_url(this.value);" data-placeholder="Country"  class="form-control chzn-select"  style="width:200px;display:inline;">
+									  <option value="">All Country</option>
+									  <?php
+									  $sqlSearchCountry=mysqli_query($conn, "select iot_countryname  from  tbl_iot_details  group by iot_countryname order by iot_countryname");
+									  while($resSearchCountry=mysqli_fetch_array($sqlSearchCountry)) { 
+									  ?>	
+									  <option value="<?php echo $resSearchCountry["iot_countryname"];?>" <?php if($resSearchCountry["iot_countryname"]==$search_country) { echo 'selected';}?>><?php echo $resSearchCountry["iot_countryname"];?></option>
+									  <?php  }?>
+									  </select>
+						  </div>
+						</div>
+					</div>	
+			
 			  
               <div id="map" style="width:100%;height:900px;"></div>
             </div>

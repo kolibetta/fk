@@ -1,25 +1,62 @@
 <?php
 	include_once 'dbconfig.php';
-	
+	error_reporting(0);
 	
 	///get Google map Adrdess//////////////////////////////////////////////////
-function getaddress($lat,$lng)
-  {
-     $url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($lat).','.trim($lng).'&sensor=false';
-     $json = @file_get_contents($url);
-     $data=json_decode($json);
-     $status = $data->status;
-     if($status=="OK")
-     {
-	   $full_address=$data->results[0]->formatted_address;
-       $state=$data->results[7]->formatted_address;
-	   return $full_address."@@@".$state;
-     }
-     else
-     {
-       return false;
-     }
-  }	
+function getcity_latlon($cityname,$countryname) {
+	$cityname = preg_replace('/\s+/', '+',$cityname);
+	$countryname = preg_replace('/\s+/', '+',$countryname);
+	$url = "https://maps.google.com/maps/api/geocode/json?address=$cityname&sensor=false&region=$countryname&key=AIzaSyBtmiAuZQaFAgfssrfwtyFEQhY2NWzkgJ0";
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	$response = curl_exec($ch);
+	curl_close($ch);
+	$response_a = json_decode($response);
+	$lat = $response_a->results[0]->geometry->location->lat;
+	$long = $response_a->results[0]->geometry->location->lng;
+	
+	return $lat."@@@".$long;	
+}		
+
+
+function getaddress($lat,$lng) {
+	$data = file_get_contents("https://maps.google.com/maps/api/geocode/json?latlng=$lat,$lng&key=AIzaSyBtmiAuZQaFAgfssrfwtyFEQhY2NWzkgJ0");
+	$data = json_decode($data);
+	$add_array  = $data->results;
+	$add_array = $add_array[0];
+	$add_array = $add_array->address_components;
+	$country = "Not found";
+	$state = "Not found"; 
+	$city = "Not found";
+	$address = "Not found";
+	
+	
+	$address=$data->results[0]->formatted_address;
+	
+	foreach ($add_array as $key) {
+		
+		
+	  if($key->types[0] == 'administrative_area_level_2'){
+		$city = $key->long_name;
+	  }
+	  
+	  if($key->types[0] == 'administrative_area_level_1'){
+		$state = $key->long_name;
+	  }
+	  
+	  if($key->types[0] == 'country'){
+		$country = $key->long_name;
+	  }
+	  
+	}
+	
+	return $country."@@@".$state."@@@".$city."@@@".$address;
+
+}
 ////////////////////////////////////////////////////////////////////////////	
 	
 //////POST DATA/////////////////////////////////////////////////////////////////////
@@ -31,33 +68,41 @@ function getaddress($lat,$lng)
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 		$output=explode("~",file_get_contents("php://input"));
-		$iot_datetime=$output[0];
-		$iot_latitude=$output[1];
-		$iot_longitude=$output[2];
-		$iot_batteryvoltage=$output[3];
-		$iot_sampling_frequency=$output[4];
-		$iot_posting_frequency=$output[5];
-		$iot_gpsfixed=$output[6];
-		$iot_satellitesfixed=$output[7];
-		$iot_imeino=$output[8];
-		$iot_power_onoff=$output[9];
-		$iot_qrcode=$output[10];
+		$iot_datetime=trim($output[0]);
+		$iot_latitude=trim($output[1]);
+		$iot_longitude=trim($output[2]);
+		$iot_batteryvoltage=trim($output[3]);
+		$iot_sampling_frequency=trim($output[4]);
+		$iot_posting_frequency=trim($output[5]);
+		$iot_gpsfixed=trim($output[6]);
+		$iot_satellitesfixed=trim($output[7]);
+		$iot_imeino=trim($output[8]);
+		$iot_power_onoff=trim($output[9]);
+		$iot_qrcode=trim($output[10]);
+		$created_date=trim(date('Y-m-d H:i:s'));
 		
-		$created_date=date('Y-m-d H:i:s');
+		///////////////GET GOOGLE LAT and LON DETAILS/////////////////////////////////////
+		$res_latlon=getaddress($iot_latitude,$iot_longitude);
+		$res_exp=explode("@@@",$res_latlon);
+		$iot_countryname=$res_exp[0];
+		$iot_statename=$res_exp[1];
+		$iot_cityname=$res_exp[2];
+		$iot_address=$res_exp[3];
+	
+		$res_city_latlon=getcity_latlon($iot_cityname,$iot_countryname);
+		$res_city_latlon_exp=explode("@@@",$res_city_latlon);
+		$iot_city_latitude=$res_city_latlon_exp[0];
+		$iot_city_longitude=$res_city_latlon_exp[1];		
+		///////////////GET GOOGLE LAT and LON DETAILS/////////////////////////////////////
 		
-		$address= getaddress($iot_latitude,$iot_longitude);	
-		if($address){
-			$final_address=explode("@@@",$address);
-			$iot_geolocation=$final_address[0];
-			$iot_address=$final_address[1];
-		}		
+	
 		
 		//echo "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `created_date`) 
 		//VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address', '$created_date')";
 		
 		//////////Insert Query////////////////////////////////////////////////////////////
-		$sql_insert_query=mysqli_query($conn, "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `created_date`) 
-		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address', '$created_date')");
+		$sql_insert_query=mysqli_query($conn, "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `iot_cityname`, `iot_statename`, `iot_countryname`, `iot_city_latitude`, `iot_city_longitude`, `created_date`) 
+		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address',  '$iot_cityname', '$iot_statename', '$iot_countryname', '$iot_city_latitude', '$iot_city_longitude', '$created_date')");
 		//////////Insert Query////////////////////////////////////////////////////////////
 		if($sql_insert_query){
 			$json_data["status"] = 1;
