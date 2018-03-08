@@ -155,6 +155,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 		  label: {
 			text: '<?php echo $numdetails_latlon;?>',
 			color: 'white',
+			fontSize: '10px'
 		  },
           title: '<?php echo $res_getlatlondetails["iot_cityname"];?>'
         });
