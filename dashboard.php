@@ -219,7 +219,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+      <h1 style="margin-top:10px;">
         Dashboard
         <small>Control panel</small>
       </h1>

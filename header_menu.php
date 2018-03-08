@@ -55,13 +55,13 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="images/user5-128x128.jpg" class="user-image rounded-circle" alt="User Image">
 			  <span style="color:#fff;font-weight:400;font-size:12px;"><?php echo $row['profile_name']; ?></span>
-			  <small style="color:#fff;font-weight:400;font-size:10px;"> <?php echo $row['profile_emailid']; ?></small>
+			  <small style="color:#fff;font-weight:400;font-size:10px;">  / <?php echo $row['profile_emailid']; ?></small>
             </a>
             <ul class="dropdown-menu scale-up">
               <!-- User image -->
               <li class="user-header">
                 <img src="images/user5-128x128.jpg" class="float-left rounded-circle" alt="User Image">
-                	<p><?php echo $row['profile_name']; ?> <small class="mb-5"><?php echo $row['profile_emailid']; ?></small>
+                	<p><?php echo $row['profile_name']; ?><small class="mb-5"><?php echo $row['profile_emailid']; ?></small>
                   <a href="#" class="btn btn-danger btn-sm btn-rounded">View Profile</a>
                 </p>
               </li>
