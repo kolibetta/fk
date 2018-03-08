@@ -93,7 +93,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Date - Time</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_datetime'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_datetime']);?></td>'
 							+ '</tr>'	
 							
 							+ '<tr>'
@@ -103,35 +103,35 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">QR Code</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_qrcode'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_qrcode']);?></td>'
 							+ '</tr>'							
 
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Latitude</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_latitude'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_latitude']);?></td>'
 							+ '</tr>'
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Longitude</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_longitude'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_longitude']);?></td>'
 							+ '</tr>'							
 							
 														
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">City</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_cityname'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_cityname']);?></td>'
 							+ '</tr>'
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">State</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_statename'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_statename']);?></td>'
 							+ '</tr>'
 							
 							+ '<tr>'
 								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Country</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo $res_getlatlondetails_A['iot_countryname'];?></td>'
+								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_countryname']);?></td>'
 							+ '</tr>'
 																					
 							
