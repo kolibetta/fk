@@ -39,13 +39,13 @@ if(!isset($_SESSION['user_session'])){
 		} else { 
 			$country_lat="15.184344641774892";
 			$country_lon="76.2060546875";
-			$zoom=1;
+			$zoom=4;
 		}
 		
 	} else { 
 		$country_lat="15.184344641774892";
 		$country_lon="76.2060546875";
-		$zoom=1;
+		$zoom=4;
 	}
 	
 

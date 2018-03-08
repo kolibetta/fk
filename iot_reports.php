@@ -77,7 +77,6 @@ if(!isset($_SESSION['user_session'])){
 			      </div>
 			      <div class="modal-body">
 			      		<div class="row">
-						
 						  <div class="col-md-6 col-xl-4"><div class="form-group"><label>Date and Time</label><div id="iot_datetime"></div></div></div>
 						  <div class="col-md-6 col-xl-4"><div class="form-group"><label>Latitude</label><div id="iot_latitude"></div></div></div>
 						  <div class="col-md-6 col-xl-4"><div class="form-group"><label>Longitude</label><div id="iot_longitude"></div></div></div>
@@ -110,17 +109,17 @@ if(!isset($_SESSION['user_session'])){
                 <thead>
 					<tr role="row" style="background: linear-gradient(#E2E2E2, #FFFFFF);font-size:12px;color:#000;">
 						<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 173px;">SL.NO</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 272px;">Date</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 132px;">Latitude</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 69px;">Longitude</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 122px;">Battery voltage</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">Sampling frequency</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">Posting frequency</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">GPS</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">No of satellites fixed</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">IMEI No</th>
-						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">Power on/off</th>
-					    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Salary: activate to sort column ascending" style="width: 95px;">QR code</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 272px;">Date</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Latitude: activate to sort column ascending" style="width: 132px;">Latitude</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Longitude: activate to sort column ascending" style="width: 69px;">Longitude</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Battery voltage: activate to sort column ascending" style="width: 122px;">Battery voltage</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Sampling : activate to sort column ascending" style="width: 95px;">Sampling frequency</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Posting frequency: activate to sort column ascending" style="width: 95px;">Posting frequency</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="GPS: activate to sort column ascending" style="width: 95px;">GPS</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="No of satellites fixed: activate to sort column ascending" style="width: 95px;">No of satellites fixed</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="IMEI No: activate to sort column ascending" style="width: 95px;">IMEI No</th>
+						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Power on/off: activate to sort column ascending" style="width: 95px;">Power on/off</th>
+					    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="QR code: activate to sort column ascending" style="width: 95px;">QR code</th>
 					</tr>
 				</thead>
               </table>
