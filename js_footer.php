@@ -66,14 +66,15 @@
 					{
 			        	"targets": 7,
 			            "render": function ( data, type, row ) {
-			                return data == 1 ? 'GPS': 'Not';
+			                return data == 1 ? 'GPS': 'CELL';
 			            }
 		        	},
 					
 					{
 			        	"targets": 10,
 			            "render": function ( data, type, row ) {
-			                return data == 1 ? 'On': 'Off';
+							if(data == 1){ return 'On'; }else if(data == 0){ return 'Off';}else {return 'NA';}
+			                
 			            }
 		        	},										
 					
@@ -107,7 +108,7 @@
 						$('#iot_batteryvoltage').text(obj.iot_batteryvoltage);
 						$('#iot_sampling_frequency').text(obj.iot_sampling_frequency);
 						$('#iot_posting_frequency').text(obj.iot_posting_frequency);
-						if(obj.iot_gpsfixed=="1"){var iot_gpsfixed="GPS"; } else {var iot_gpsfixed="CELL"; }
+						if(obj.iot_gpsfixed=="1"){var iot_gpsfixed="GPS"; } else if(obj.iot_gpsfixed=="0"){ var iot_gpsfixed="CELL"; } else {var iot_gpsfixed="-";}
 						$('#iot_gpsfixed').text(iot_gpsfixed);
 						$('#iot_satellitesfixed').text(obj.iot_satellitesfixed);
 						$('#iot_imeino').text(obj.iot_imeino);
