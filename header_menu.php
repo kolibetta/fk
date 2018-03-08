@@ -1,4 +1,15 @@
 <?php
+$useragent = $_SERVER['HTTP_USER_AGENT']; 
+$iPod = stripos($useragent, "iPod"); 
+$iPad = stripos($useragent, "iPad"); 
+$iPhone = stripos($useragent, "iPhone");
+$Android = stripos($useragent, "Android"); 
+$iOS = stripos($useragent, "iOS");
+//-- You can add billion devices 
+
+$DEVICE = ($iPod||$iPad||$iPhone||$Android||$iOS||$webOS||$Blackberry||$IEMobile||$OperaMini);
+
+
 $stmt = $db_con->prepare("SELECT * FROM tbl_user WHERE user_id=:uid");
 $stmt->execute(array(":uid"=>$_SESSION['user_session']));
 $row=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,10 +34,11 @@ $row=$stmt->fetch(PDO::FETCH_ASSOC);
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-	  
+	  <?php if ($DEVICE !=true) { ?>
 	  <a>
 	  	<h3 style="color:#fff;font-weight:400;font-size:25px;">Quinta Systems</h3>
 	  </a>
+	  <?php } ?>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
 		  
