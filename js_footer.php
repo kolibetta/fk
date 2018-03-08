@@ -63,6 +63,18 @@
 		        	},
 					
 					
+					
+					{
+			        	"targets": 4,
+			            "render": function ( data, type, row ) {
+							var data_first = data.charAt(0);
+							var data_second =data.substring(1);
+							var final_volt=data_first+' . '+data_second+" V";
+			                return final_volt;
+			            }
+		        	},					
+					
+					
 					{
 			        	"targets": 7,
 			            "render": function ( data, type, row ) {
