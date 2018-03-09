@@ -33,19 +33,19 @@ if(!isset($_SESSION['user_session'])){
 		$sqlgetlatlondetailsCountry=mysqli_query($conn, "select iot_latitude,iot_longitude,iot_countryname from  tbl_iot_details where 1=1 $join_country and iot_countryname<>'' group by iot_countryname");
 		$resgetlatlondetailsCountry=mysqli_fetch_array($sqlgetlatlondetailsCountry);
 		if($sqlgetlatlondetailsCountry) {
-			$country_lat=$resgetlatlondetailsCountry["iot_latitude"];
-			$country_lon=$resgetlatlondetailsCountry["iot_longitude"];
-			$zoom=4;
+			$country_lat="12.934533";
+			$country_lon="77.626579";
+			$zoom=10;
 		} else { 
-			$country_lat="15.184344641774892";
-			$country_lon="76.2060546875";
-			$zoom=4;
+			$country_lat="12.934533";
+			$country_lon="77.626579";
+			$zoom=10;
 		}
 		
 	} else { 
-		$country_lat="15.184344641774892";
-		$country_lon="76.2060546875";
-		$zoom=4;
+			$country_lat="12.934533";
+			$country_lon="77.626579";
+			$zoom=10;
 	}
 	
 
@@ -55,7 +55,21 @@ if(!isset($_SESSION['user_session'])){
 		var mapCenter = new google.maps.LatLng(<?php echo $country_lat;?>, <?php echo $country_lon;?>);
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: <?php echo $zoom;?>,
-         center: mapCenter
+         center: mapCenter,
+		 mapTypeControl: true,
+          mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.TOP_CENTER
+          },
+          zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.LEFT_CENTER
+          },
+          scaleControl: true,
+          streetViewControl: true,
+          streetViewControlOptions: {
+              position: google.maps.ControlPosition.LEFT_TOP
+          }
         });			  
 
 
