@@ -17,173 +17,13 @@ if(!isset($_SESSION['user_session'])){
     .chzn-rtl .chzn-drop { left: -9000px; }
   </style>
 <script src="assets/vendor_components/jquery/dist/jquery.min.js"></script> 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtmiAuZQaFAgfssrfwtyFEQhY2NWzkgJ0&callback=initMap"></script>
+
 
 <script src="js/highcharts.js"></script>
 <script src="js/highcharts-3d.js"></script>
 <script src="js/exporting.js"></script>
 
-<?php
-
-	$search_country=$_REQUEST["search_country"];
 	
-	if($search_country) { 
-	
-		$join_country=" and iot_countryname='$search_country' "; 
-		$sqlgetlatlondetailsCountry=mysqli_query($conn, "select iot_latitude,iot_longitude,iot_countryname from  tbl_iot_details where 1=1 $join_country and iot_countryname<>'' group by iot_countryname");
-		$resgetlatlondetailsCountry=mysqli_fetch_array($sqlgetlatlondetailsCountry);
-		if($sqlgetlatlondetailsCountry) {
-			$country_lat="12.934533";
-			$country_lon="77.626579";
-			$zoom=10;
-		} else { 
-			$country_lat="12.934533";
-			$country_lon="77.626579";
-			$zoom=10;
-		}
-		
-	} else { 
-			$country_lat="12.934533";
-			$country_lon="77.626579";
-			$zoom=10;
-	}
-	
-
-	?>
-<script>
-      function initMap() {
-		var mapCenter = new google.maps.LatLng(<?php echo $country_lat;?>, <?php echo $country_lon;?>);
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: <?php echo $zoom;?>,
-         center: mapCenter,
-		 mapTypeControl: true,
-          mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.TOP_CENTER
-          },
-          zoomControl: true,
-          zoomControlOptions: {
-              position: google.maps.ControlPosition.LEFT_CENTER
-          },
-          scaleControl: true,
-          streetViewControl: true,
-          streetViewControlOptions: {
-              position: google.maps.ControlPosition.LEFT_TOP
-          }
-        });			  
-
-
-<?php 
-	
-	if($search_country) { $join_country=" and iot_countryname='$search_country' ";} else {$join_country="";}
-	$sqlgetlatlondetails=mysqli_query($conn, "select * from  tbl_iot_details where iot_cityname<>'' $join_country group by iot_cityname");
-	$count_geo=0;
-	while($res_getlatlondetails=mysqli_fetch_array($sqlgetlatlondetails)) { 
-	$count_geo++;
-	$iot_cityname=$res_getlatlondetails["iot_cityname"];
-	
-
-	
-?>
-var contentString<?php echo $count_geo;?> = '<div id="content" style="background:#ffffff;overflow-y:scroll;width:300px;max-height:350px;">'
-				+ '<table width="100%"  cellspacing="0" cellpadding="0" border="0"   >'
-					+ '<tr>' 
-					+ '<td  valign=middle   style="padding:5px;" valign="top">'
-					
-					<?php 
-					$sqlgetlatlondetails_A=mysqli_query($conn, "select * from  tbl_iot_details where iot_cityname='$iot_cityname'");
-					$numdetails_latlon=mysqli_num_rows($sqlgetlatlondetails_A);
-					$count_geoA=0;
-					while($res_getlatlondetails_A=mysqli_fetch_array($sqlgetlatlondetails_A)) { 
-					$count_geoA++;
-					?>
-					
-						+ '<table width="100%"  cellspacing="0" cellpadding="0" border="0" style="font-size:11px;border:1px solid #d5d5d5;background: linear-gradient(#F5F5F5, #FFFFFF);margin-bottom:10px;">'
-							
-							+ '<tr>'
-								+ '<td colspan="2"  valign=middle   style="padding:5px;font-size:11px;" valign="top"><div style="font-weight:bold;font-size:13px;">Address : </div><div style="padding-top:10px;font-size:11px;"><?php echo $res_getlatlondetails_A['iot_address'];?></div>'
-								+ '</td>'
-							+ '</tr>'
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Date - Time</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_datetime']);?></td>'
-							+ '</tr>'	
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">IMEINO</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_imeino']);?></td>'
-							+ '</tr>'							
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">QR Code</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_qrcode']);?></td>'
-							+ '</tr>'							
-
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Latitude</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_latitude']);?></td>'
-							+ '</tr>'
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Longitude</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_longitude']);?></td>'
-							+ '</tr>'							
-							
-														
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">City</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_cityname']);?></td>'
-							+ '</tr>'
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">State</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_statename']);?></td>'
-							+ '</tr>'
-							
-							+ '<tr>'
-								+ '<td  valign=middle   style="padding:5px;font-weight:bold;font-size:11px;" valign="top">Country</td>'
-								+ '<td  valign=middle   style="padding:5px;font-size:11px;" valign="top"><?php echo trim($res_getlatlondetails_A['iot_countryname']);?></td>'
-							+ '</tr>'
-																					
-							
-
-						+ '</table>'
-					<?php }?>
-						
-					+ '</td>'
-					+ '</tr>'
-					+ '</table>'
-+ '</div>'; 
-
-
-        var infowindow<?php echo $count_geo;?>= new google.maps.InfoWindow({
-        content: contentString<?php echo $count_geo;?>        
-		});
-        var marker<?php echo $count_geo;?> = new google.maps.Marker({
-         position: new google.maps.LatLng(<?php echo $res_getlatlondetails["iot_city_latitude"];?>, <?php echo $res_getlatlondetails["iot_city_longitude"];?>),
-          map: map,
-		  icon: 'images/hq.png',  
-		  label: {
-			text: '<?php echo $numdetails_latlon;?>',
-			color: 'white',
-			fontSize: '9px'
-		  },
-          title: '<?php echo $res_getlatlondetails["iot_cityname"];?>'
-        });
-        marker<?php echo $count_geo;?>.addListener('click', function() {
-          infowindow<?php echo $count_geo;?>.open(map, marker<?php echo $count_geo;?>);
-        });
-
-/////marker1//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-<?php  }?>
-
-
-
-      }
-    </script>	
 	
 	
 	
@@ -425,7 +265,7 @@ var contentString<?php echo $count_geo;?> = '<div id="content" style="background
 					</div>	
 			
 			  
-              <div id="map" style="width:100%;height:900px;"></div>
+              <div id="map" style="width:100%;height:900px;display:none;"></div>
             </div>
             <!-- /.box-body -->
           </div>
