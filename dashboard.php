@@ -190,27 +190,7 @@ if(!isset($_SESSION['user_session'])){
 					
 					
 					
-					
-					<div class="row">
-						<div class="col-md-3" style="margin-left:0px;"><strong>Select State : </strong></div>
-						<div class="col-md-3" style="margin-left:0px;">
-							<div class="form-group">
-
-									
-									<select  name="search_state" id="search_state"  onChange="dochange_statics_circle(this.value);" data-placeholder="State"  class="form-control chzn-select"  style="width:200px;display:inline;" >
-									  <option value="">Karnataka</option>
-									  <?php
-									  $sqlSearchState=mysqli_query($conn, "select trim(iot_statename)  from  tbl_iot_details  group by trim(iot_statename) order by iot_statename");
-									  while($resSearchState=mysqli_fetch_array($sqlSearchState)) { 
-									  ?>	
-									  <option value="<?php echo $resSearchState["iot_statename"];?>" <?php if($resSearchState["iot_statename"]==$search_country) { echo 'selected';}?>><?php echo $resSearchState["iot_statename"];?></option>
-									  <?php  }?>
-									  </select>
-						  </div>
-						</div>
-					</div>				
-			
-					<div id="ajax_stastics_circle"></div>					
+				
 					
 					
 					
@@ -236,7 +216,7 @@ if(!isset($_SESSION['user_session'])){
           <!-- AREA CHART -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Geo Location <small>Get User LAT LON Position</small></h3>
+              <h3 class="box-title">Locationwise <small>Statistics Report</small></h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -245,27 +225,30 @@ if(!isset($_SESSION['user_session'])){
             </div>
             <div class="box-body">
 			
+					
 					<div class="row">
-						<div class="col-md-3" style="margin-left:0px;"><strong>Select Country : </strong></div>
+						<div class="col-md-3" style="margin-left:0px;"><strong>Select State : </strong></div>
 						<div class="col-md-3" style="margin-left:0px;">
 							<div class="form-group">
 
 									
-									<select  name="search_country" id="search_country"  onchange="change_url(this.value);" data-placeholder="Country"  class="form-control chzn-select"  style="width:200px;display:inline;">
-									  <option value="">All Country</option>
+									<select  name="search_state" id="search_state"  onChange="dochange_statics_circle(this.value);" data-placeholder="State"  class="form-control chzn-select"  style="width:200px;display:inline;" >
+									  <option value="">Karnataka</option>
 									  <?php
-									  $sqlSearchCountry=mysqli_query($conn, "select iot_countryname  from  tbl_iot_details  group by iot_countryname order by iot_countryname");
-									  while($resSearchCountry=mysqli_fetch_array($sqlSearchCountry)) { 
+									  $sqlSearchState=mysqli_query($conn, "select trim(iot_statename)  from  tbl_iot_details  group by trim(iot_statename) order by iot_statename");
+									  while($resSearchState=mysqli_fetch_array($sqlSearchState)) { 
 									  ?>	
-									  <option value="<?php echo $resSearchCountry["iot_countryname"];?>" <?php if($resSearchCountry["iot_countryname"]==$search_country) { echo 'selected';}?>><?php echo $resSearchCountry["iot_countryname"];?></option>
+									  <option value="<?php echo $resSearchState["iot_statename"];?>" <?php if($resSearchState["iot_statename"]==$search_country) { echo 'selected';}?>><?php echo $resSearchState["iot_statename"];?></option>
 									  <?php  }?>
 									  </select>
 						  </div>
 						</div>
-					</div>	
+					</div>				
 			
-			  
-              <div id="map" style="width:100%;height:900px;display:none;"></div>
+					<div id="ajax_stastics_circle"></div>	
+			
+			
+			
             </div>
             <!-- /.box-body -->
           </div>
