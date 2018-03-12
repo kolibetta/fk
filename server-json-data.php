@@ -28,6 +28,9 @@
 			}
 			$sOrder = substr_replace($sOrder, "", -2);
 			if ( $sOrder == "ORDER BY" ) $sOrder = "";
+		} else {
+			
+			$sOrder = " ORDER BY iot_id desc";
 		}
 
 		// QUERY SEARCH
