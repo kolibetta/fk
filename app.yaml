@@ -6,7 +6,7 @@ handlers:
   script: index.php
   
 # Serve images/js/css as static resources.
-- url: /(.+\.(gif|png|jpg|js|css|jpeg|tif))$
+- url: /(.+\.(gif|png|jpg|js|css|jpeg|tiff))$
   static_files: \1
   upload: .+\.(gif|png|jpg)$
   application_readable: true
