@@ -1,8 +1,8 @@
 <?php
 	$db_host = "localhost";
-	$db_name = "flipkart";
-	$db_user = "root";
-	$db_pass = "";
+	$db_name = "newflipkartiot";
+	$db_user = "quintaflipkart";
+	$db_pass = "quint(%#&^IOT)_3842";
 	
 	try{
 		
@@ -14,9 +14,9 @@
 	}
 	
 
-	$gaSql['user'] = "root";
-	$gaSql['password'] = "";
-	$gaSql['db'] = "flipkart";
+	$gaSql['user'] = "quintaflipkart";
+	$gaSql['password'] = "quint(%#&^IOT)_3842";
+	$gaSql['db'] = "newflipkartiot";
 	$gaSql['server'] = "localhost";
 	$conn = mysqli_connect($gaSql['server'], $gaSql['user'], $gaSql['password'], $gaSql['db']);
 	
