@@ -19,12 +19,14 @@ if(!isset($_SESSION['user_session'])){
 <script src="assets/vendor_components/jquery/dist/jquery.min.js"></script> 
 
 
+
 <script src="js/highcharts.js"></script>
-<script src="js/highcharts-3d.js"></script>
 <script src="js/exporting.js"></script>
 
-	
-	
+<script src="js/highcharts-3d.js"></script>
+
+
+
 	
 	
 	<script language="javascript">
@@ -186,30 +188,21 @@ if(!isset($_SESSION['user_session'])){
 					</div>
 					
 					<div id="ajax_stastics"></div>
-					
-					
-					
-					
 				
-					
-					
-					
-					
 			</div>
 			
-			
-
-			
-			
-			
-			
-			
-			
-			
-			
+		
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+		  
+		  
+
+		  
+		  
+		  
+		  
+		  
         </div>  
 		
         <div class="col-md-6 col-12">
@@ -253,6 +246,9 @@ if(!isset($_SESSION['user_session'])){
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+		  
+
+		  
         </div> 
 		  
 

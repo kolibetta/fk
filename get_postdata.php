@@ -1,6 +1,8 @@
 <?php
+
 	include_once 'dbconfig.php';
 	error_reporting(0);
+	date_default_timezone_set("Asia/Calcutta");
 	
 	///get Google map Adrdess//////////////////////////////////////////////////
 function getcity_latlon($cityname,$countryname) {
