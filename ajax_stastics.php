@@ -8,7 +8,9 @@ $action=date('Y');
 }
 
 
-						$sql_graphdetails=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%m') as iotyear_month, count(iot_id) as total_count  from  tbl_iot_details where DATE_FORMAT(iot_datetime, '%Y')='$action'  group by DATE_FORMAT(iot_datetime, '%Y-%m')");
+						//$sql_graphdetails=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%m') as iotyear_month, count(iot_id) as total_count  from  tbl_iot_details where DATE_FORMAT(iot_datetime, '%Y')='$action'  group by DATE_FORMAT(iot_datetime, '%Y-%m')");
+						
+						$sql_graphdetails=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%Y-%m') as iotyear_month, count(iot_id) as total_count  from  tbl_iot_details where DATE_FORMAT(iot_datetime, '%Y')='2018' group by DATE_FORMAT(iot_datetime, '%Y-%m')");
 						$jan_moth="";
 						$feb_moth="";
 						$mar_moth="";
@@ -28,6 +30,8 @@ $action=date('Y');
 						while($res_graphdetails=mysqli_fetch_array($sql_graphdetails)) { 
 						
 							$iotyear_month=$res_graphdetails["iotyear_month"];
+							$ffexplode=explode("-", $iotyear_month);
+							$iotyear_month=$ffexplode[1];
 							$total_count=$res_graphdetails["total_count"];
 							
 
