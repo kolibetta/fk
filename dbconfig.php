@@ -1,5 +1,5 @@
 <?php
-	$db_host = "newflipkartiot.appspot.com";
+	$db_host = "35.200.219.50";
 	$db_name = "newflipkartiot";
 	$db_user = "quintaflipkart";
 	$db_pass = "quint(%#&^IOT)_3842";
@@ -17,7 +17,7 @@
 	$gaSql['user'] = "quintaflipkart";
 	$gaSql['password'] = "quint(%#&^IOT)_3842";
 	$gaSql['db'] = "newflipkartiot";
-	$gaSql['server'] = "newflipkartiot.appspot.com";
+	$gaSql['server'] = "35.200.219.50";
 	$conn = mysqli_connect($gaSql['server'], $gaSql['user'], $gaSql['password'], $gaSql['db']);
 	
 	
