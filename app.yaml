@@ -14,3 +14,11 @@ handlers:
 # Serve php scripts.
 - url: /(.+\.php)$
   script: \1
+  
+  
+  env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  MYSQL_DSN: mysql:unix_socket=/cloudsql/newflipkartiot:asia-south1:newflipkartiot;dbname=newflipkartiot
+  MYSQL_USER: quintaflipkart
+  MYSQL_PASSWORD: quint(%#&^IOT)_3842
