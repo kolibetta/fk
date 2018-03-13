@@ -82,14 +82,14 @@ function getaddress($lat,$lng) {
 		$created_date=trim(date('Y-m-d H:i:s'));
 		
 		///////////////GET GOOGLE LAT and LON DETAILS/////////////////////////////////////
-		//$res_latlon=getaddress($iot_latitude,$iot_longitude);
+		$res_latlon=getaddress($iot_latitude,$iot_longitude);
 		$res_exp=explode("@@@",$res_latlon);
 		$iot_countryname=$res_exp[0];
 		$iot_statename=$res_exp[1];
 		$iot_cityname=$res_exp[2];
 		$iot_address=$res_exp[3];
 	
-		//$res_city_latlon=getcity_latlon($iot_cityname,$iot_countryname);
+		$res_city_latlon=getcity_latlon($iot_cityname,$iot_countryname);
 		$res_city_latlon_exp=explode("@@@",$res_city_latlon);
 		$iot_city_latitude=$res_city_latlon_exp[0];
 		$iot_city_longitude=$res_city_latlon_exp[1];		
@@ -100,11 +100,14 @@ function getaddress($lat,$lng) {
 		echo "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `iot_cityname`, `iot_statename`, `iot_countryname`, `iot_city_latitude`, `iot_city_longitude`, `created_date`) 
 		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address',  '$iot_cityname', '$iot_statename', '$iot_countryname', '$iot_city_latitude', '$iot_city_longitude', '$created_date')";
 		
-		die();
+		
 		
 		//////////Insert Query////////////////////////////////////////////////////////////
 		$sql_insert_query=mysqli_query($conn, "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `iot_cityname`, `iot_statename`, `iot_countryname`, `iot_city_latitude`, `iot_city_longitude`, `created_date`) 
 		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address',  '$iot_cityname', '$iot_statename', '$iot_countryname', '$iot_city_latitude', '$iot_city_longitude', '$created_date')");
+		
+		die();
+		
 		//////////Insert Query////////////////////////////////////////////////////////////
 		if($sql_insert_query){
 			$json_data["status"] = 1;
