@@ -6,21 +6,12 @@
 function getcity_latlon($cityname,$countryname) {
 	$cityname = preg_replace('/\s+/', '+',$cityname);
 	$countryname = preg_replace('/\s+/', '+',$countryname);
-	$url = "https://maps.google.com/maps/api/geocode/json?address=$cityname&sensor=false&region=$countryname&key=AIzaSyBtmiAuZQaFAgfssrfwtyFEQhY2NWzkgJ0";
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-	$response = curl_exec($ch);
-	curl_close($ch);
-	$response_a = json_decode($response);
-	$lat = $response_a->results[0]->geometry->location->lat;
-	$long = $response_a->results[0]->geometry->location->lng;
-	
+	$url = file_get_contents("https://maps.google.com/maps/api/geocode/json?address=$cityname&sensor=false&region=$countryname&key=AIzaSyBtmiAuZQaFAgfssrfwtyFEQhY2NWzkgJ0");
+	$output = json_decode($url);
+	$lat  = $output->results[0]->geometry->location->lat; 
+    $long = $output->results[0]->geometry->location->lng;
 	return $lat."@@@".$long;	
-}		
+}			
 
 
 function getaddress($lat,$lng) {
@@ -82,14 +73,14 @@ function getaddress($lat,$lng) {
 		$created_date=trim(date('Y-m-d H:i:s'));
 		
 		///////////////GET GOOGLE LAT and LON DETAILS/////////////////////////////////////
-		//$res_latlon=getaddress($iot_latitude,$iot_longitude);
+		$res_latlon=getaddress($iot_latitude,$iot_longitude);
 		$res_exp=explode("@@@",$res_latlon);
 		$iot_countryname=$res_exp[0];
 		$iot_statename=$res_exp[1];
 		$iot_cityname=$res_exp[2];
 		$iot_address=$res_exp[3];
 	
-		//$res_city_latlon=getcity_latlon($iot_cityname,$iot_countryname);
+		$res_city_latlon=getcity_latlon($iot_cityname,$iot_countryname);
 		$res_city_latlon_exp=explode("@@@",$res_city_latlon);
 		$iot_city_latitude=$res_city_latlon_exp[0];
 		$iot_city_longitude=$res_city_latlon_exp[1];		
@@ -97,8 +88,10 @@ function getaddress($lat,$lng) {
 		
 	
 		
-		//echo "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `created_date`) 
-		//VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address', '$created_date')";
+		echo "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `iot_cityname`, `iot_statename`, `iot_countryname`, `iot_city_latitude`, `iot_city_longitude`, `created_date`) 
+		VALUES (NULL, '$iot_datetime', '$iot_latitude', '$iot_longitude', '$iot_batteryvoltage', '$iot_sampling_frequency', '$iot_posting_frequency', '$iot_gpsfixed', '$iot_satellitesfixed', '$iot_imeino', '$iot_power_onoff', '$iot_qrcode', '$iot_geolocation', '$iot_address',  '$iot_cityname', '$iot_statename', '$iot_countryname', '$iot_city_latitude', '$iot_city_longitude', '$created_date')";
+		
+		die();
 		
 		//////////Insert Query////////////////////////////////////////////////////////////
 		$sql_insert_query=mysqli_query($conn, "INSERT INTO `tbl_iot_details`(`iot_id`, `iot_datetime`, `iot_latitude`, `iot_longitude`, `iot_batteryvoltage`, `iot_sampling_frequency`, `iot_posting_frequency`, `iot_gpsfixed`, `iot_satellitesfixed`, `iot_imeino`, `iot_power_onoff`, `iot_qrcode`, `iot_geolocation`, `iot_address`, `iot_cityname`, `iot_statename`, `iot_countryname`, `iot_city_latitude`, `iot_city_longitude`, `created_date`) 
