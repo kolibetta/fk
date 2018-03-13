@@ -1,7 +1,7 @@
 <?php
 	include_once 'dbconfig.php';
 	
-	$aColumns = array('iot_id', 'iot_datetime', 'iot_latitude', 'iot_longitude', 'iot_batteryvoltage', 'iot_sampling_frequency', 'iot_posting_frequency', 'iot_gpsfixed', 'iot_satellitesfixed', 'iot_imeino', 'iot_power_onoff');
+	$aColumns = array('iot_id', 'iot_datetime', 'iot_latitude', 'iot_longitude', 'iot_batteryvoltage', 'iot_sampling_frequency', 'iot_posting_frequency', 'iot_gpsfixed', 'iot_satellitesfixed', 'iot_imeino', 'iot_power_onoff', 'iot_qrcode');
 	$sIndexColumn = "iot_id";
 	$sTable = "tbl_iot_details";
 	// AJAX EDIT FROM JQUERY

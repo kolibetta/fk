@@ -120,6 +120,7 @@ if(!isset($_SESSION['user_session'])){
 						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="IMEI No: activate to sort column ascending" style="width: 95px;">IMEI No</th>
 						<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="Power on/off: activate to sort column ascending" style="width: 95px;">Power on/off</th>
 					    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" aria-label="QR code: activate to sort column ascending" style="width: 95px;">QR code</th>
+						<th  tabindex="0" aria-controls="example1" rowspan="1" >Action</th>
 					</tr>
 				</thead>
               </table>
