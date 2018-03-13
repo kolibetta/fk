@@ -65,7 +65,9 @@ function getaddress($lat,$lng) {
 		"status" => 0,
 		"POST_DATA" => isset($_POST) ? $_POST : array(),
 	);
-	if($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if($_SERVER['REQUEST_METHOD'] == 'GET') {
+		
+		echo $name=$_REQUEST["name"];
 	
 		$output=explode("~",file_get_contents("php://input"));
 		$iot_datetime=trim($output[0]);
