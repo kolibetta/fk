@@ -35,6 +35,9 @@ if(!isset($_SESSION['user_session'])){
 	margin:-100px 0 0 -100px; /* is width and height divided by two */
 }
 </style>
+
+
+  
 </head>
 
 <body class="hold-transition skin-blue-light sidebar-mini sidebar-collapse fixed">
@@ -74,7 +77,9 @@ if(!isset($_SESSION['user_session'])){
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="edit-modal-label" style="color:#000;">Customer set values</h4>
+					
 			      </div>
+				  
 			      <div class="modal-body">
 			      		<div class="row">
 						  <div class="col-md-6 col-xl-4"><div class="form-group"><label>Date and Time</label><div id="iot_datetime"></div></div></div>
@@ -105,6 +110,26 @@ if(!isset($_SESSION['user_session'])){
          
           <div class="box">
             <div class="box-body">
+			
+				<table cellpadding="3" cellspacing="0" border="0">
+					<tr id="filter_col9" data-column="9">
+						<td>Seach by IMEI No :</td>
+						<td align="center">
+									  <select  name="search_imeino" id="col9_filter"  class="column_filter form-control"   data-column="9"   style="width:200px;display:inline;">
+									  <option value="">Select IMEI No</option>
+	
+									  <?php
+									  $sql_iot_imeino=mysqli_query($conn, "select distinct(iot_imeino) as my_imeino from  tbl_iot_details group by iot_imeino");
+									  while($res_iot_imeino=mysqli_fetch_array($sql_iot_imeino)) { 
+									  ?>	
+									  <option  value="<?php echo trim($res_iot_imeino["my_imeino"]);?>"><?php echo $res_iot_imeino["my_imeino"];?></option>
+									  <?php  }?>
+
+									  </select>
+					</td>
+					</tr>
+				</table>
+			
               <table id="example1" class="table table-bordered table-striped table-responsive dataTable display" role="grid">
                 <thead>
 					<tr role="row" style="background: linear-gradient(#E2E2E2, #FFFFFF);font-size:12px;color:#000;">

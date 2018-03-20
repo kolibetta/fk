@@ -31,6 +31,15 @@
 	<script src="js/demo.js"></script>
 	
 	<script>
+	
+	
+	function filterColumn ( i ) { 
+		$('#example1').DataTable().column( i ).search(
+			$('#col9_filter').val()
+		).draw();
+	}
+
+
 		$(document).ready(function() {
 		    $('#example1').DataTable( {
 				"aProcessing": true,
@@ -102,10 +111,14 @@
 					
 					
 		        ]
-				
-				
-				
 		    });
+			
+			
+			$('.column_filter').on( 'change', function () {
+				filterColumn( $(this).parents('tr').attr('data-column') );
+			});
+	
+	
 		});
 		
 		
