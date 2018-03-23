@@ -47,13 +47,16 @@
 		}
 
 		// BUILD QUERY
+		$sWhere = "WHERE 1=1 ";
 		for ( $i = 0; $i < count($aColumns); $i++ ) {
 			if ( isset($_GET['bSearchable_' . $i]) && $_GET['bSearchable_' . $i] == "true" && $_GET['sSearch_' . $i] != '' ) {
-				if ( $sWhere == "" ) $sWhere = "WHERE ";
-				else $sWhere .= " AND ";
+				
+				$sWhere .= " AND ";
 				$sWhere .= $aColumns[$i] . " LIKE '%" . mysqli_real_escape_string($_GET['sSearch_' . $i]) . "%' ";
-			}
+			} 
 		}
+		
+		$sWhere .= "  AND iot_imeino<>'' ";
 
 		// FETCH
 		$sQuery = " SELECT SQL_CALC_FOUND_ROWS " . str_replace(" , ", " ", implode(", ", $aColumns)) . " FROM $sTable $sWhere $sOrder $sLimit ";
