@@ -119,7 +119,7 @@ if(!isset($_SESSION['user_session'])){
 									  <option value="">Select IMEI No</option>
 	
 									  <?php
-									  $sql_iot_imeino=mysqli_query($conn, "select distinct(iot_imeino) as my_imeino from  tbl_iot_details group by iot_imeino");
+									  $sql_iot_imeino=mysqli_query($conn, "select distinct(iot_imeino) as my_imeino from  tbl_iot_details where iot_imeino<>'' group by iot_imeino");
 									  while($res_iot_imeino=mysqli_fetch_array($sql_iot_imeino)) { 
 									  ?>	
 									  <option  value="<?php echo trim($res_iot_imeino["my_imeino"]);?>"><?php echo $res_iot_imeino["my_imeino"];?></option>
