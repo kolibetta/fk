@@ -176,7 +176,7 @@ if(!isset($_SESSION['user_session'])){
 									<select  name="start_date" id="start_date" data-placeholder="Select Year"  class="form-control chzn-select"  style="width:200px;display:inline;"  onChange="dochange_statics(this.value);">
 									  <option value="">Select Year</option>
 									  <?php
-									  $sql_select_year=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%Y') as iot_date  from  tbl_iot_details group by DATE_FORMAT(iot_datetime, '%Y') and iot_imeino<>'' ");
+									  $sql_select_year=mysqli_query($conn, "select DATE_FORMAT(iot_datetime, '%Y') as iot_date  from  tbl_iot_details group by DATE_FORMAT(iot_datetime, '%Y') where iot_imeino<>'' ");
 									  while($res_year=mysqli_fetch_array($sql_select_year)) { 
 									  ?>	
 									  <option value="<?php echo $res_year["iot_date"];?>" <?php if($res_year["iot_date"]==date('Y')) { echo 'selected';}?>><?php echo $res_year["iot_date"];?></option>
