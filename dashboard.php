@@ -88,7 +88,7 @@ if(!isset($_SESSION['user_session'])){
     <!-- Main content -->
     <section class="content">
 	<?php
-	$sql_stasttics=mysqli_query($conn, "select count(*) as total_user_count from tbl_iot_details");
+	$sql_stasttics=mysqli_query($conn, "select count(*) as total_user_count from tbl_iot_details where iot_imeino<>''");
 	$res_stasttics=mysqli_fetch_array($sql_stasttics);
 	$total_user_count=$res_stasttics["total_user_count"];
 	?>

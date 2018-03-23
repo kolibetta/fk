@@ -38,7 +38,7 @@ Highcharts.chart('container_pie', {
         name: 'Users Hit Count',
         data: [
 		<?php
-		$sql_graphdetailscityhit=mysqli_query($conn, "select count(iot_id) as totalhit, iot_cityname  from  tbl_iot_details where iot_statename='$action'  group by iot_cityname");
+		$sql_graphdetailscityhit=mysqli_query($conn, "select count(iot_id) as totalhit, iot_cityname  from  tbl_iot_details where iot_statename='$action' and iot_imeino<>''  group by iot_cityname");
 		while($res_graphdetailscityhit=mysqli_fetch_array($sql_graphdetailscityhit)) { 
 		$iot_cityname=$res_graphdetailscityhit["iot_cityname"];
 		$total_count=$res_graphdetailscityhit["totalhit"];
